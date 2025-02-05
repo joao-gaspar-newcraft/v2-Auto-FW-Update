@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Path to the version file
+VERSION_FILE="include/version.h"
+
+# Extract current version (assumes format: X.Y.Z)
+VERSION=$(grep -oP '(?<=#define VERSION ")(\d+\.\d+\.\d+)' "$VERSION_FILE" | head -n 1)
+
+# Split version number
+IFS='.' read -r -a VERSION_ARRAY <<< "$VERSION"
+
+# Increment patch version
+PATCH=${VERSION_ARRAY[2]}
+PATCH=$((PATCH + 1))
+VERSION_ARRAY[2]=$PATCH
+
+# Create new version string
+NEW_VERSION="${VERSION_ARRAY[0]}.${VERSION_ARRAY[1]}.$PATCH"
+
+# Update version file
+sed -i "s/#define VERSION \".*\"/#define VERSION \"$NEW_VERSION\"/" "$VERSION_FILE"
+sed -i "s/#define VERSION_TIMESTAMP \".*\"/#define VERSION_TIMESTAMP \"$(date '+%Y-%m-%d_%H:%M')\"/" "$VERSION_FILE"
+
+# Stage the updated version file
+git add "$VERSION_FILE"
