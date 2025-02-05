@@ -2,9 +2,9 @@
 #define VERSION_H
 
 // Automatically updated version number
-#define VERSION "1.0.1"
+#define VERSION "1.0.2"
 
 // Timestamp of the last commit
-#define VERSION_TIMESTAMP "2025-02-05_12:44"
+#define VERSION_TIMESTAMP "2025-02-05_12:45"
 
 #endif // VERSION_H
