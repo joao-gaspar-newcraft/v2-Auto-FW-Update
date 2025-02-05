@@ -1,6 +1,6 @@
 #include <Arduino.h>
 
-// Commit #2
+// Commit #3
 
 // put function declarations here:
 int myFunction(int, int);
